@@ -3694,6 +3694,13 @@ var PlatformNavigation = class _PlatformNavigation {
 
 // node_modules/@angular/common/fesm2022/common.mjs
 var PLATFORM_BROWSER_ID = "browser";
+var PLATFORM_SERVER_ID = "server";
+function isPlatformBrowser(platformId) {
+  return platformId === PLATFORM_BROWSER_ID;
+}
+function isPlatformServer(platformId) {
+  return platformId === PLATFORM_SERVER_ID;
+}
 var VERSION = new Version("20.3.13");
 var ViewportScroller = class _ViewportScroller {
   // De-sugared tree-shakable injection
@@ -5013,10 +5020,15 @@ export {
   PathLocationStrategy,
   Location,
   HashLocationStrategy,
+  NgIf,
+  NgStyle,
+  NgTemplateOutlet,
   CommonModule,
   parseCookieValue,
   XhrFactory,
   PLATFORM_BROWSER_ID,
+  isPlatformBrowser,
+  isPlatformServer,
   ViewportScroller
 };
 /*! Bundled license information:
@@ -5032,4 +5044,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-77AS7TPQ.js.map
+//# sourceMappingURL=chunk-ZVH2A2TD.js.map
