@@ -6,39 +6,15 @@
       <a href="/#pricing">Precios</a>
       <a href="/#how">Cómo funciona</a>
       <a href="/#contact" class="btn-outline">Contacto</a>
+      <a href="/#contact" class="btn-outline">Ingresar</a>
     </div>
   </nav>
-
-  <div class="hero container hero-layout">
-    <div class="hero-left">
-      <div class="eyebrow">SaaS • Facturación Electrónica</div>
-      <h1>Automatiza tus facturas electrónicas con cumplimiento del Ministerio de Hacienda</h1>
-      <p class="lead">eFacturaMe SV provee generación, envío y almacenamiento de facturas electrónicas, con firma y
-        validación automática en Hacienda. Ideal para pymes y contadores.</p>
-
-      <div class="hero-actions">
-        <a href="mailto:ventas%40efacturame.sv" class="btn-primary">Solicitar cotización</a>
-        <a href="/#how" class="btn-ghost">Ver demo</a>
-      </div>
-
-      <ul class="quick-list">
-        <li>Implementación 1–2 días hábiles</li>
-        <li>Soporte urgente (WhatsApp/email)</li>
-        <li>Pruebas en Hacienda y despliegue a producción</li>
-      </ul>
-    </div>
-
-    <div class="hero-right">
-      <div class="card-visual">
-        <div class="card-head">Oferta Mensual — Ejemplo</div>
-        <pre class="composite-box">{{ compositeSummaryText }}</pre>
-        <div class="card-footer">Precios de referencia • No incluyen IVA</div>
-      </div>
-    </div>
-  </div>
 </header>
 
 <main class="container">
+  <section id="hero" class="section hero-block">
+    <app-hero></app-hero>
+  </section>
   <section id="features" class="section features-block">
     <app-feature></app-feature>
   </section>

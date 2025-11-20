@@ -1,12 +1,13 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ServiceComposite, ServiceLeaf } from './composite';
-import { Feature } from './components/landing/feature/feature';
+import {Component, signal} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
+import {ServiceComposite, ServiceLeaf} from './composite';
+import {Feature} from './components/landing/feature/feature';
 import { Plans } from './components/landing/plans/plans';
+import { Login } from './components/login/login';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Feature, Plans],
+  imports: [RouterOutlet, Feature, Plans, Login],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

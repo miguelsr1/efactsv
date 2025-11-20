@@ -7,74 +7,30 @@
   </div>
 
   <div class="flex lg:flex-row flex-col gap-8 max-w-7xl mx-auto">
-    <div class="w-full flex-1 p-8 flex rounded-2xl flex-col bg-surface-0 dark:bg-surface-800 shadow-sm gap-6">
-      <div class="flex flex-col gap-2">
-        <h4 class="text-surface-900 dark:text-surface-0 font-medium text-xl leading-tight">Basic</h4>
-        <p class="text-surface-500 dark:text-surface-400 leading-normal"></p>
-      </div>
+    <ng-container *ngFor="let p of plans">
+      <div class="w-full flex-1 p-8 flex rounded-2xl flex-col bg-surface-0 dark:bg-surface-800 shadow-sm gap-6">
+        <div class="flex flex-col gap-2">
+          <h4 class="text-surface-900 dark:text-surface-0 font-medium text-xl leading-tight">{{ p.size }}</h4>
+          <p class="text-surface-500 dark:text-surface-400 leading-normal"></p>
+        </div>
 
-      <div class="w-full h-px bg-surface-200 dark:bg-surface-700"></div>
-      <div class="flex items-center gap-2">
-        <span class="font-bold text-3xl text-surface-900 dark:text-surface-0 leading-tight">$5.99</span>
-        <span class="font-medium text-surface-500 dark:text-surface-400 leading-tight">por mes</span>
+        <div class="w-full h-px bg-surface-200 dark:bg-surface-700"></div>
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-3xl text-surface-900 dark:text-surface-0 leading-tight">${{ p.price }}</span>
+          <span class="font-medium text-surface-500 dark:text-surface-400 leading-tight">por mes</span>
+        </div>
+        <div class="w-full h-px bg-surface-200 dark:bg-surface-600"></div>
+        <ul class="list-none flex flex-col gap-4 flex-1">
+          <li class="flex items-center gap-2">
+            <i class="pi pi-check-circle text-lg! text-green-500"></i>
+            <span class="text-surface-800 dark:text-surface-100 leading-tight"> {{ p.featureA }} </span>
+          </li>
+          <li class="flex items-center gap-2">
+            <i class="pi pi-check-circle text-lg! text-green-500"></i>
+            <span class="text-surface-800 dark:text-surface-100 leading-tight"> {{ p.featureB }} </span>
+          </li>
+        </ul>
       </div>
-      <div class="w-full h-px bg-surface-200 dark:bg-surface-600"></div>
-      <ul class="list-none flex flex-col gap-4 flex-1">
-        <li class="flex items-center gap-2">
-          <i class="pi pi-check-circle text-lg! text-green-500"></i>
-          <span class="text-surface-800 dark:text-surface-100 leading-tight"> Hasta 150 DTES </span>
-        </li>
-        <li class="flex items-center gap-2">
-          <i class="pi pi-check-circle text-lg! text-green-500"></i>
-          <span class="text-surface-800 dark:text-surface-100 leading-tight"> 1 Usuario </span>
-        </li>
-      </ul>
-    </div>
-    <div class="w-full flex-1 p-8 flex rounded-2xl flex-col bg-surface-0 dark:bg-surface-800 shadow-sm gap-6">
-      <div class="flex flex-col gap-2">
-        <h4 class="text-surface-900 dark:text-surface-0 font-medium text-xl leading-tight">Premium</h4>
-        <p class="text-surface-500 dark:text-surface-400 leading-normal"></p>
-      </div>
-
-      <div class="w-full h-px bg-surface-200 dark:bg-surface-700"></div>
-      <div class="flex items-center gap-2">
-        <span class="font-bold text-3xl text-surface-900 dark:text-surface-0 leading-tight">$12.99</span>
-        <span class="font-medium text-surface-500 dark:text-surface-400 leading-tight">por mes</span>
-      </div>
-      <div class="w-full h-px bg-surface-200 dark:bg-surface-600"></div>
-      <ul class="list-none flex flex-col gap-4 flex-1">
-        <li class="flex items-center gap-2">
-          <i class="pi pi-check-circle text-lg! text-green-500"></i>
-          <span class="text-surface-800 dark:text-surface-100 leading-tight"> Hasta 400 DTES </span>
-        </li>
-        <li class="flex items-center gap-2">
-          <i class="pi pi-check-circle text-lg! text-green-500"></i>
-          <span class="text-surface-800 dark:text-surface-100 leading-tight"> 2 Usuarios </span>
-        </li>
-      </ul>
-    </div>
-    <div class="w-full flex-1 p-8 flex rounded-2xl flex-col bg-surface-0 dark:bg-surface-800 shadow-sm gap-6">
-      <div class="flex flex-col gap-2">
-        <h4 class="text-surface-900 dark:text-surface-0 font-medium text-xl leading-tight">Enterprise</h4>
-        <p class="text-surface-500 dark:text-surface-400 leading-normal"> </p>
-      </div>
-
-      <div class="w-full h-px bg-surface-200 dark:bg-surface-700"></div>
-      <div class="flex items-center gap-2">
-        <span class="font-bold text-3xl text-surface-900 dark:text-surface-0 leading-tight">$16.99</span>
-        <span class="font-medium text-surface-500 dark:text-surface-400 leading-tight">por mes</span>
-      </div>
-      <div class="w-full h-px bg-surface-200 dark:bg-surface-600"></div>
-      <ul class="list-none flex flex-col gap-4 flex-1">
-        <li class="flex items-center gap-2">
-          <i class="pi pi-check-circle text-lg! text-green-500"></i>
-          <span class="text-surface-800 dark:text-surface-100 leading-tight"> Hasta 800 DTES </span>
-        </li>
-        <li class="flex items-center gap-2">
-          <i class="pi pi-check-circle text-lg! text-green-500"></i>
-          <span class="text-surface-800 dark:text-surface-100 leading-tight"> 4 usuarios </span>
-        </li>
-      </ul>
-    </div>
+    </ng-container>
   </div>
 </div>
