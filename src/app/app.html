@@ -1,4 +1,4 @@
-<header class="pb-8 hero-block">
+<header *ngIf="!isLoginRoute" class="pb-8 hero-block">
   <nav class="nav container">
     <div class="brand">eFacturaMe SV</div>
     <div class="nav-links">
@@ -6,15 +6,16 @@
       <a href="/#pricing">Precios</a>
       <a href="/#how">Cómo funciona</a>
       <a href="/#contact" class="btn-outline">Contacto</a>
-      <a href="/#contact" class="btn-outline">Ingresar</a>
+      <a (click)="goToLogin()" class="btn-outline" style="cursor:pointer">Ingresar</a>
     </div>
   </nav>
+
+  <div class="hero container hero-layout">
+    <app-hero></app-hero>
+  </div>
 </header>
 
-<main class="container">
-  <section id="hero" class="section hero-block">
-    <app-hero></app-hero>
-  </section>
+<main *ngIf="!isLoginRoute" class="container">
   <section id="features" class="section features-block">
     <app-feature></app-feature>
   </section>
@@ -47,11 +48,8 @@
   <section id="testimonials" class="section testimonials-block">
     <h2>Lo que dicen nuestros clientes</h2>
     <div class="testimonials-grid">
-      <blockquote class="testimonial">"Implementar eFacturaMe fue muy rápido y nos simplificó la contabilidad." —
-        Contador, Pyme SV
-      </blockquote>
-      <blockquote class="testimonial">"El soporte responde en minutos cuando hay urgencias." — Gerente financiero
-      </blockquote>
+      <blockquote class="testimonial">"Implementar eFacturaMe fue muy rápido y nos simplificó la contabilidad." — Contador, Pyme SV</blockquote>
+      <blockquote class="testimonial">"El soporte responde en minutos cuando hay urgencias." — Gerente financiero</blockquote>
     </div>
   </section>
 
@@ -88,13 +86,13 @@
 
       <form class="contact-form" action="mailto:ventas%40efacturame.sv" method="post" enctype="text/plain">
         <label for="contact-name">Nombre</label>
-        <input id="contact-name" type="text" name="name" required/>
+        <input id="contact-name" type="text" name="name" required />
 
         <label for="contact-email">Email</label>
-        <input id="contact-email" type="email" name="email" required/>
+        <input id="contact-email" type="email" name="email" required />
 
         <label for="contact-company">Empresa</label>
-        <input id="contact-company" type="text" name="company"/>
+        <input id="contact-company" type="text" name="company" />
 
         <label for="contact-message">Mensaje</label>
         <textarea id="contact-message" name="message" required></textarea>
@@ -108,7 +106,10 @@
   </section>
 </main>
 
-<footer class="site-footer">
+<!-- router-outlet se muestra siempre para renderizar rutas como /login -->
+<router-outlet></router-outlet>
+
+<footer *ngIf="!isLoginRoute" class="site-footer">
   <div class="container footer-inner">
     <div>© eFacturaMe SV</div>
     <div class="footer-links">
@@ -117,5 +118,3 @@
     </div>
   </div>
 </footer>
-
-<router-outlet></router-outlet>

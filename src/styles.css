@@ -2,3 +2,18 @@
 @import "tailwindcss";
 @import "tailwindcss-primeui";
 @import "primeicons/primeicons.css";
+
+:root {
+    /* Ejemplo usando verde esmeralda */
+    --p-primary-50: var(--p-sky-50) !important;
+    --p-primary-100: var(--p-sky-100) !important;
+    --p-primary-200: var(--p-sky-200) !important;
+    --p-primary-300: var(--p-sky-300) !important;
+    --p-primary-400: var(--p-sky-400) !important;
+    --p-primary-500: var(--p-sky-500) !important;
+    --p-primary-600: var(--p-sky-600) !important;
+    --p-primary-700: var(--p-sky-700) !important;
+    --p-primary-800: var(--p-sky-800) !important;
+    --p-primary-900: var(--p-sky-900) !important;
+    --p-primary-950: var(--p-sky-950) !important;
+}

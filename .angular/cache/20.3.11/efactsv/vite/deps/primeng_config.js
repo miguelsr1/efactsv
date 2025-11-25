@@ -3,10 +3,10 @@ import {
   PrimeNG,
   ThemeProvider,
   providePrimeNG
-} from "./chunk-42SK6ZM5.js";
-import "./chunk-GXSXDM4U.js";
-import "./chunk-I4445LCO.js";
-import "./chunk-FZFDBNJQ.js";
+} from "./chunk-UAYJ7DXV.js";
+import "./chunk-VQJKPAD6.js";
+import "./chunk-YA5NHZPA.js";
+import "./chunk-CORRA3TE.js";
 import "./chunk-WDMUDEB6.js";
 export {
   PRIME_NG_CONFIG,

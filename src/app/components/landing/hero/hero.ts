@@ -4,9 +4,10 @@ import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-hero',
+  standalone: true,
   imports: [CommonModule, ButtonModule],
   templateUrl: './hero.html',
-  styleUrl: './hero.css',
+  styleUrls: ['./hero.css'],
 })
 export class Hero {
 

@@ -1,0 +1,44 @@
+/* Hacer que el root del componente ocupe todo el viewport */
+:host {
+  display: block;
+  min-height: 100vh;
+  width: 100%;
+  background-color: transparent;
+}
+
+/* El primer div del template será el área de fondo y centrado */
+:host > div {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Aumentar el ancho máximo de la tarjeta y garantizar buena responsividad */
+:host .max-w-sm {
+  max-width: 640px; /* más ancho para escritorio */
+  width: 100%;
+}
+
+/* Ajustes visuales de la tarjeta interior para que se vea como modal centrado */
+:host .rounded-2xl {
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.25);
+  backdrop-filter: blur(8px);
+}
+
+/* Botón principal: ocupar todo el ancho en móvil */
+:host button[pButton] {
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  :host > div { padding: 1rem; }
+  :host .max-w-sm { padding-left: 1rem; padding-right: 1rem; }
+}
+

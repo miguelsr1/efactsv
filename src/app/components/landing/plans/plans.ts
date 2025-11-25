@@ -11,16 +11,17 @@ interface Plan {
 
 @Component({
   selector: 'app-plans',
+  standalone: true,
   imports: [CommonModule, ButtonModule],
   templateUrl: './plans.html',
-  styleUrl: './plans.css',
+  styleUrls: ['./plans.css'],
 })
 export class Plans {
   // Arreglo de planes con la estructura solicitada
   // Usado directamente por la plantilla (plans.html)
   plans: Plan[] = [
-    { size: 'Básico', price: 5.99, featureA: 'Generación de hasta 150 DTES', featureB: '1 usuario de acceso' },
-    { size: 'Premium', price: 12.99, featureA: 'Generación de hasta 400 DTES', featureB: '2 usuarios de acceso' },
-    { size: 'Enterprise', price: 16.99, featureA: 'Generación de hasta 800 DTES', featureB: '2 usuarios de acceso' },
+    { size: 'Paquete Básico A', price: 5.99, featureA: 'Generación de hasta 150 DTES', featureB: '1 usuario de acceso' },
+    { size: 'Paquete Básico B', price: 50, featureA: 'Generación de hasta 400 DTES', featureB: '2 usuarios de acceso' },
+    { size: 'Paquete Básico C', price: 100, featureA: 'Generación de hasta 800 DTES', featureB: '2 usuarios de acceso' },
   ];
 }

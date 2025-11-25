@@ -1,6 +1,6 @@
 import {
   CommonModule
-} from "./chunk-I4445LCO.js";
+} from "./chunk-YA5NHZPA.js";
 import {
   Component,
   Directive,
@@ -18,7 +18,7 @@ import {
   ɵɵdirectiveInject,
   ɵɵprojection,
   ɵɵprojectionDef
-} from "./chunk-FZFDBNJQ.js";
+} from "./chunk-CORRA3TE.js";
 
 // node_modules/@primeuix/utils/dist/classnames/index.mjs
 function f(...e) {
@@ -281,6 +281,12 @@ function p2(e, t2) {
 }
 function k(e, t2, n2) {
   return n2 ? p2(e, n2) === p2(t2, n2) : y(e, t2);
+}
+function q(e, t2) {
+  if (e != null && t2 && t2.length) {
+    for (let n2 of t2) if (k(e, n2)) return true;
+  }
+  return false;
 }
 function i2(e, t2 = true) {
   return e instanceof Object && e.constructor === Object && (t2 || Object.keys(e).length !== 0);
@@ -1275,6 +1281,7 @@ export {
   c3 as c,
   s2,
   k,
+  q,
   i2 as i,
   m,
   a,
@@ -1302,4 +1309,4 @@ export {
   TranslationKeys,
   TreeDragDropService
 };
-//# sourceMappingURL=chunk-GXSXDM4U.js.map
+//# sourceMappingURL=chunk-VQJKPAD6.js.map
