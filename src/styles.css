@@ -17,3 +17,10 @@
     --p-primary-900: var(--p-sky-900) !important;
     --p-primary-950: var(--p-sky-950) !important;
 }
+
+/* Estilos globales para inputs pequeños */
+.p-inputtext {
+    font-size: var(--p-inputtext-sm-font-size) !important;
+    padding-block: var(--p-inputtext-sm-padding-y);
+    padding-inline: var(--p-inputtext-sm-padding-x);
+}

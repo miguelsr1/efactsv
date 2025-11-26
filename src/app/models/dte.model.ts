@@ -15,3 +15,10 @@ export interface Dte {
     idEstablecimiento: number;
     idPuntoVenta: number;
 }
+
+export interface DteSearchParams {
+    correo?: string;
+    fecha?: string;
+    nombre?: string;
+    numDocumento?: string;
+}

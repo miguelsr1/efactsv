@@ -1,9 +1,49 @@
 <div class="consulta-container p-4">
+    <!-- Filtros -->
+    <div class="card bg-surface-0 dark:bg-surface-900 shadow-sm rounded-lg p-4 mb-4">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-medium text-surface-700 dark:text-surface-100 m-0">Listado de DTE registrados</h3>
+            <button pButton icon="pi pi-cog" class="p-button-text p-button-rounded p-button-secondary"></button>
+        </div>
+
+        <!-- Filtros en una sola fila -->
+        <div class="grid formgrid p-fluid mb-3">
+            <div class="field col-12 md:col-6">
+                <label for="nombre" class="text-sm text-surface-600 dark:text-surface-300 mb-2">Nombre Cliente</label>
+                <input pInputText id="nombre" [(ngModel)]="filtroNombre" placeholder="Nombre Cliente" class="w-full" />
+            </div>
+            <div class="field col-12 md:col-6">
+                <label for="numDocumento" class="text-sm text-surface-600 dark:text-surface-300 mb-2">Número de
+                    Documento cliente</label>
+                <input pInputText id="numDocumento" [(ngModel)]="filtroNumDocumento"
+                    placeholder="Número de Documento cliente" class="w-full" />
+            </div>
+            <div class="field col-12 md:col-6">
+                <label for="correo" class="text-sm text-surface-600 dark:text-surface-300 mb-2">Correo cliente</label>
+                <input pInputText id="correo" [(ngModel)]="filtroCorreo" placeholder="Correo cliente" class="w-full" />
+            </div>
+            <div class="field col-12 md:col-6">
+                <label for="fecha" class="text-sm text-surface-600 dark:text-surface-300 mb-2">Fecha creación</label>
+                <p-datepicker id="fecha" [(ngModel)]="filtroFecha" dateFormat="yy-mm-dd" placeholder="Fecha creación"
+                    class="w-full"></p-datepicker>
+            </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="flex justify-start gap-2">
+            <button pButton label="Limpiar" icon="pi pi-filter-slash" class="p-button-outlined"
+                (click)="limpiar()"></button>
+            <button pButton label="Buscar" icon="pi pi-search" (click)="buscar()"></button>
+        </div>
+    </div>
+
     <div class="card bg-surface-0 dark:bg-surface-900 shadow-sm rounded-2xl p-4">
         <!-- Header con búsqueda -->
         <div class="flex justify-between items-center mb-4">
             <div class="flex items-center gap-2">
-                <i class="pi pi-filter text-surface-500"></i>
+                <i class="pi pi-list text-surface-500"></i>
+                <span class="font-semibold text-lg">Listado de DTEs</span>
             </div>
             <button pButton icon="pi pi-cog" class="p-button-text p-button-rounded"></button>
         </div>
@@ -42,7 +82,8 @@
                         </div>
                     </td>
                     <td style="width: 175px;">
-                        <span style="display: inline-block" class="style-estado status-badge" [ngClass]="getEstadoClass(dte.estadoDescripcion)">
+                        <span style="display: inline-block" class="style-estado status-badge"
+                            [ngClass]="getEstadoClass(dte.estadoDescripcion)">
                             {{ dte.estadoDescripcion }}
                         </span>
                     </td>

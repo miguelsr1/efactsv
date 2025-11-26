@@ -5,9 +5,10 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { TagModule } from 'primeng/tag';
+import { DatePickerModule } from 'primeng/datepicker';
 import { TooltipModule } from 'primeng/tooltip';
 import { DteService } from '../../services/dte.service';
-import { Dte } from '../../models/dte.model';
+import { Dte, DteSearchParams } from '../../models/dte.model';
 
 @Component({
     selector: 'app-consulta',
@@ -19,7 +20,8 @@ import { Dte } from '../../models/dte.model';
         ButtonModule,
         InputTextModule,
         TagModule,
-        TooltipModule
+        TooltipModule,
+        DatePickerModule
     ],
     templateUrl: './consulta.html',
     styleUrls: ['./consulta.css']
@@ -29,6 +31,12 @@ export class ConsultaComponent implements OnInit {
     loading: boolean = true;
     error: string | null = null;
 
+    // Filtros
+    filtroCorreo: string = '';
+    filtroFecha: Date | null = null;
+    filtroNombre: string = '';
+    filtroNumDocumento: string = '';
+
     constructor(private dteService: DteService) { }
 
     ngOnInit(): void {
@@ -37,7 +45,14 @@ export class ConsultaComponent implements OnInit {
 
     loadDtes(): void {
         this.loading = true;
-        this.dteService.getAllDtes().subscribe({
+
+        const params: DteSearchParams = {};
+        if (this.filtroCorreo) params.correo = this.filtroCorreo;
+        if (this.filtroFecha) params.fecha = this.filtroFecha.toISOString().split('T')[0];
+        if (this.filtroNombre) params.nombre = this.filtroNombre;
+        if (this.filtroNumDocumento) params.numDocumento = this.filtroNumDocumento;
+
+        this.dteService.getAllDtes(params).subscribe({
             next: (data) => {
                 this.dtes = data;
                 this.loading = false;
@@ -48,6 +63,18 @@ export class ConsultaComponent implements OnInit {
                 console.error(err);
             }
         });
+    }
+
+    buscar(): void {
+        this.loadDtes();
+    }
+
+    limpiar(): void {
+        this.filtroCorreo = '';
+        this.filtroFecha = null;
+        this.filtroNombre = '';
+        this.filtroNumDocumento = '';
+        this.loadDtes();
     }
 
     /**
