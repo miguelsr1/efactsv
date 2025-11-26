@@ -1,32 +1,32 @@
 import {
-  BaseEditableHolder
-} from "./chunk-RNM4FP5U.js";
+  BaseModelHolder
+} from "./chunk-EDLG2ZUY.js";
 import {
   CheckIcon,
   MinusIcon
-} from "./chunk-CMDMB3GK.js";
+} from "./chunk-HHVLHIS6.js";
 import {
   PARENT_INSTANCE
-} from "./chunk-RWISOUQC.js";
+} from "./chunk-5R4NJNW6.js";
 import {
   Bind,
   BindModule
-} from "./chunk-PD2XNUYI.js";
+} from "./chunk-NFIBDODL.js";
 import {
   BaseStyle
-} from "./chunk-4HPP5VIZ.js";
-import {
-  PrimeTemplate,
-  SharedModule
-} from "./chunk-HBQVYHGF.js";
-import {
-  k2 as k,
-  q
-} from "./chunk-K2WABBE6.js";
+} from "./chunk-IB4S2XJ2.js";
 import {
   NG_VALUE_ACCESSOR,
   NgControl
 } from "./chunk-PYUQ7X2E.js";
+import {
+  PrimeTemplate,
+  SharedModule
+} from "./chunk-KN5VXIPC.js";
+import {
+  k2 as k,
+  q
+} from "./chunk-LNCYK5A5.js";
 import {
   CommonModule,
   NgClass,
@@ -38,6 +38,7 @@ import {
   Component,
   ContentChild,
   ContentChildren,
+  Directive,
   EventEmitter,
   Injectable,
   InjectionToken,
@@ -62,6 +63,7 @@ import {
   ɵɵclassMap,
   ɵɵcontentQuery,
   ɵɵdefineComponent,
+  ɵɵdefineDirective,
   ɵɵdefineInjectable,
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
@@ -85,6 +87,104 @@ import {
   ɵɵtemplate,
   ɵɵviewQuery
 } from "./chunk-DO6YOXJK.js";
+
+// node_modules/primeng/fesm2022/primeng-baseeditableholder.mjs
+var BaseEditableHolder = class _BaseEditableHolder extends BaseModelHolder {
+  /**
+   * There must be a value (if set).
+   * @defaultValue false
+   * @group Props
+   */
+  required = input(void 0, ...ngDevMode ? [{
+    debugName: "required",
+    transform: booleanAttribute
+  }] : [{
+    transform: booleanAttribute
+  }]);
+  /**
+   * When present, it specifies that the component should have invalid state style.
+   * @defaultValue false
+   * @group Props
+   */
+  invalid = input(void 0, ...ngDevMode ? [{
+    debugName: "invalid",
+    transform: booleanAttribute
+  }] : [{
+    transform: booleanAttribute
+  }]);
+  /**
+   * When present, it specifies that the component should have disabled state style.
+   * @defaultValue false
+   * @group Props
+   */
+  disabled = input(void 0, ...ngDevMode ? [{
+    debugName: "disabled",
+    transform: booleanAttribute
+  }] : [{
+    transform: booleanAttribute
+  }]);
+  /**
+   * When present, it specifies that the name of the input.
+   * @defaultValue undefined
+   * @group Props
+   */
+  name = input(...ngDevMode ? [void 0, {
+    debugName: "name"
+  }] : []);
+  _disabled = signal(false, ...ngDevMode ? [{
+    debugName: "_disabled"
+  }] : []);
+  $disabled = computed(() => this.disabled() || this._disabled(), ...ngDevMode ? [{
+    debugName: "$disabled"
+  }] : []);
+  onModelChange = () => {
+  };
+  onModelTouched = () => {
+  };
+  writeDisabledState(value) {
+    this._disabled.set(value);
+  }
+  writeControlValue(value, setModelValue) {
+  }
+  /**** Angular ControlValueAccessors ****/
+  writeValue(value) {
+    this.writeControlValue(value, this.writeModelValue.bind(this));
+  }
+  registerOnChange(fn) {
+    this.onModelChange = fn;
+  }
+  registerOnTouched(fn) {
+    this.onModelTouched = fn;
+  }
+  setDisabledState(val) {
+    this.writeDisabledState(val);
+    this.cd.markForCheck();
+  }
+  static ɵfac = /* @__PURE__ */ (() => {
+    let ɵBaseEditableHolder_BaseFactory;
+    return function BaseEditableHolder_Factory(__ngFactoryType__) {
+      return (ɵBaseEditableHolder_BaseFactory || (ɵBaseEditableHolder_BaseFactory = ɵɵgetInheritedFactory(_BaseEditableHolder)))(__ngFactoryType__ || _BaseEditableHolder);
+    };
+  })();
+  static ɵdir = ɵɵdefineDirective({
+    type: _BaseEditableHolder,
+    inputs: {
+      required: [1, "required"],
+      invalid: [1, "invalid"],
+      disabled: [1, "disabled"],
+      name: [1, "name"]
+    },
+    features: [ɵɵInheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(BaseEditableHolder, [{
+    type: Directive,
+    args: [{
+      standalone: true
+    }]
+  }], null, null);
+})();
 
 // node_modules/@primeuix/styles/dist/checkbox/index.mjs
 var style = "\n    .p-checkbox {\n        position: relative;\n        display: inline-flex;\n        user-select: none;\n        vertical-align: bottom;\n        width: dt('checkbox.width');\n        height: dt('checkbox.height');\n    }\n\n    .p-checkbox-input {\n        cursor: pointer;\n        appearance: none;\n        position: absolute;\n        inset-block-start: 0;\n        inset-inline-start: 0;\n        width: 100%;\n        height: 100%;\n        padding: 0;\n        margin: 0;\n        opacity: 0;\n        z-index: 1;\n        outline: 0 none;\n        border: 1px solid transparent;\n        border-radius: dt('checkbox.border.radius');\n    }\n\n    .p-checkbox-box {\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        border-radius: dt('checkbox.border.radius');\n        border: 1px solid dt('checkbox.border.color');\n        background: dt('checkbox.background');\n        width: dt('checkbox.width');\n        height: dt('checkbox.height');\n        transition:\n            background dt('checkbox.transition.duration'),\n            color dt('checkbox.transition.duration'),\n            border-color dt('checkbox.transition.duration'),\n            box-shadow dt('checkbox.transition.duration'),\n            outline-color dt('checkbox.transition.duration');\n        outline-color: transparent;\n        box-shadow: dt('checkbox.shadow');\n    }\n\n    .p-checkbox-icon {\n        transition-duration: dt('checkbox.transition.duration');\n        color: dt('checkbox.icon.color');\n        font-size: dt('checkbox.icon.size');\n        width: dt('checkbox.icon.size');\n        height: dt('checkbox.icon.size');\n    }\n\n    .p-checkbox:not(.p-disabled):has(.p-checkbox-input:hover) .p-checkbox-box {\n        border-color: dt('checkbox.hover.border.color');\n    }\n\n    .p-checkbox-checked .p-checkbox-box {\n        border-color: dt('checkbox.checked.border.color');\n        background: dt('checkbox.checked.background');\n    }\n\n    .p-checkbox-checked .p-checkbox-icon {\n        color: dt('checkbox.icon.checked.color');\n    }\n\n    .p-checkbox-checked:not(.p-disabled):has(.p-checkbox-input:hover) .p-checkbox-box {\n        background: dt('checkbox.checked.hover.background');\n        border-color: dt('checkbox.checked.hover.border.color');\n    }\n\n    .p-checkbox-checked:not(.p-disabled):has(.p-checkbox-input:hover) .p-checkbox-icon {\n        color: dt('checkbox.icon.checked.hover.color');\n    }\n\n    .p-checkbox:not(.p-disabled):has(.p-checkbox-input:focus-visible) .p-checkbox-box {\n        border-color: dt('checkbox.focus.border.color');\n        box-shadow: dt('checkbox.focus.ring.shadow');\n        outline: dt('checkbox.focus.ring.width') dt('checkbox.focus.ring.style') dt('checkbox.focus.ring.color');\n        outline-offset: dt('checkbox.focus.ring.offset');\n    }\n\n    .p-checkbox-checked:not(.p-disabled):has(.p-checkbox-input:focus-visible) .p-checkbox-box {\n        border-color: dt('checkbox.checked.focus.border.color');\n    }\n\n    .p-checkbox.p-invalid > .p-checkbox-box {\n        border-color: dt('checkbox.invalid.border.color');\n    }\n\n    .p-checkbox.p-variant-filled .p-checkbox-box {\n        background: dt('checkbox.filled.background');\n    }\n\n    .p-checkbox-checked.p-variant-filled .p-checkbox-box {\n        background: dt('checkbox.checked.background');\n    }\n\n    .p-checkbox-checked.p-variant-filled:not(.p-disabled):has(.p-checkbox-input:hover) .p-checkbox-box {\n        background: dt('checkbox.checked.hover.background');\n    }\n\n    .p-checkbox.p-disabled {\n        opacity: 1;\n    }\n\n    .p-checkbox.p-disabled .p-checkbox-box {\n        background: dt('checkbox.disabled.background');\n        border-color: dt('checkbox.checked.disabled.border.color');\n    }\n\n    .p-checkbox.p-disabled .p-checkbox-box .p-checkbox-icon {\n        color: dt('checkbox.icon.disabled.color');\n    }\n\n    .p-checkbox-sm,\n    .p-checkbox-sm .p-checkbox-box {\n        width: dt('checkbox.sm.width');\n        height: dt('checkbox.sm.height');\n    }\n\n    .p-checkbox-sm .p-checkbox-icon {\n        font-size: dt('checkbox.icon.sm.size');\n        width: dt('checkbox.icon.sm.size');\n        height: dt('checkbox.icon.sm.size');\n    }\n\n    .p-checkbox-lg,\n    .p-checkbox-lg .p-checkbox-box {\n        width: dt('checkbox.lg.width');\n        height: dt('checkbox.lg.height');\n    }\n\n    .p-checkbox-lg .p-checkbox-icon {\n        font-size: dt('checkbox.icon.lg.size');\n        width: dt('checkbox.icon.lg.size');\n        height: dt('checkbox.icon.lg.size');\n    }\n";
@@ -724,10 +824,11 @@ var CheckboxModule = class _CheckboxModule {
 })();
 
 export {
+  BaseEditableHolder,
   CheckboxStyle,
   CheckboxClasses,
   CHECKBOX_VALUE_ACCESSOR,
   Checkbox,
   CheckboxModule
 };
-//# sourceMappingURL=chunk-NV4UWMBC.js.map
+//# sourceMappingURL=chunk-K2SEL2DW.js.map

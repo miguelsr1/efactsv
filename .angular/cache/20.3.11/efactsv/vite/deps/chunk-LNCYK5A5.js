@@ -433,14 +433,8 @@ function re(e) {
   return a(e) ? e.replace(/(_)/g, "-").replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase() : e;
 }
 
-// node_modules/@primeuix/utils/dist/uuid/index.mjs
-var t = {};
-function s2(n2 = "pui_id_") {
-  return Object.hasOwn(t, n2) || (t[n2] = 0), t[n2]++, `${n2}${t[n2]}`;
-}
-
 // node_modules/@primeuix/utils/dist/eventbus/index.mjs
-function s3() {
+function s2() {
   let r = /* @__PURE__ */ new Map();
   return { on(e, t2) {
     let n2 = r.get(e);
@@ -505,6 +499,12 @@ function w2(...t2) {
   }, {});
 }
 
+// node_modules/@primeuix/utils/dist/uuid/index.mjs
+var t = {};
+function s3(n2 = "pui_id_") {
+  return Object.hasOwn(t, n2) || (t[n2] = 0), t[n2]++, `${n2}${t[n2]}`;
+}
+
 // node_modules/@primeuix/utils/dist/zindex/index.mjs
 function g2() {
   let r = [], i3 = (e, n2, t2 = 999) => {
@@ -559,7 +559,7 @@ export {
   Gt,
   Kt,
   _t,
-  s3 as s,
+  s2 as s,
   w2 as w,
   l,
   y2 as y,
@@ -582,6 +582,6 @@ export {
   Y2,
   X,
   re,
-  s2 as s3
+  s3
 };
-//# sourceMappingURL=chunk-K2WABBE6.js.map
+//# sourceMappingURL=chunk-LNCYK5A5.js.map
