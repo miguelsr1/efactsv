@@ -1,0 +1,71 @@
+<div class="consulta-container p-4">
+    <div class="card bg-surface-0 dark:bg-surface-900 shadow-sm rounded-2xl p-4">
+        <!-- Header con búsqueda -->
+        <div class="flex justify-between items-center mb-4">
+            <div class="flex items-center gap-2">
+                <i class="pi pi-filter text-surface-500"></i>
+            </div>
+            <button pButton icon="pi pi-cog" class="p-button-text p-button-rounded"></button>
+        </div>
+
+        <!-- Tabla -->
+        <p-table [value]="dtes" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+            [rowsPerPageOptions]="[10, 25, 50]" styleClass="p-datatable-sm custom-table" [loading]="loading">
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="abrevDte">DTE <p-sortIcon field="abrevDte"></p-sortIcon></th>
+                    <th pSortableColumn="nombre">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
+                    <th># Documento</th>
+                    <th>Correo</th>
+                    <th pSortableColumn="fechaCreacion">Fecha Creación <p-sortIcon field="fechaCreacion"></p-sortIcon>
+                    </th>
+                    <th>Código Generación</th>
+                    <th>Estado</th>
+                    <th>Operaciones</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-dte>
+                <tr>
+                    <td>{{ dte.abrevDte }}</td>
+                    <td>{{ dte.nombre }}</td>
+                    <td>{{ dte.numDocumento }}</td>
+                    <td>{{ dte.correo }}</td>
+                    <td>{{ dte.fechaCreacion }}</td>
+                    <td class="text-sm font-mono">
+                        <div class="flex items-center gap-2">
+                            {{ dte.codigoGeneracion }}
+                            <button pButton icon="pi pi-copy" class="p-button-text p-button-rounded p-button-sm"
+                                (click)="copyText(dte.codigoGeneracion)" pTooltip="Copiar código"></button>
+                        </div>
+                    </td>
+                    <td style="width: 175px;">
+                        <span style="display: inline-block" class="style-estado status-badge" [ngClass]="getEstadoClass(dte.estadoDescripcion)">
+                            {{ dte.estadoDescripcion }}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="flex gap-2">
+                            <button pButton icon="pi pi-print" class="p-button-info p-button-sm"
+                                pTooltip="Imprimir"></button>
+                            <button pButton icon="pi pi-ban" class="p-button-secondary p-button-sm"
+                                pTooltip="Anular"></button>
+                            <button pButton icon="pi pi-download" class="p-button-success p-button-sm"
+                                pTooltip="Descargar"></button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="8" class="text-center p-4">
+                        No se encontraron registros.
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

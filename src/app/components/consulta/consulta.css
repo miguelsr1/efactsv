@@ -1,0 +1,69 @@
+/* Estilos personalizados para la tabla de consulta */
+
+.custom-table ::ng-deep .p-datatable-thead>tr>th {
+    background: #f8fafc;
+    color: #64748b;
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.custom-table ::ng-deep .p-datatable-tbody>tr>td {
+    padding: 1rem;
+    border-bottom: 1px solid #f1f5f9;
+    color: #334155;
+    font-size: 0.875rem;
+}
+
+.custom-table ::ng-deep .p-datatable-tbody>tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Badges de estado */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    display: inline-block;
+    min-width: 80px;
+    text-align: center;
+}
+
+/* Clases específicas solicitadas */
+.dte-no-recibido {
+    background: #eef4fa;
+    color: #949aa6;
+}
+
+.dte-recibido {
+    background: #C8E6C9;
+    color: #256029;
+}
+
+.dte-rechazado {
+    background: #FFCDD2;
+    color: #C63737;
+}
+
+.dte-recibido-observado {
+    background: #FEEDAF;
+    color: #8A5340;
+}
+
+.dte-anulado {
+    background: #949aa6;
+    color: black;
+}
+
+.style-estado {
+    border-radius: 2px;
+    padding: 0.25em 0.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+    width: 150px !important;
+}
