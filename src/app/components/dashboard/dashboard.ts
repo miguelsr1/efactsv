@@ -51,6 +51,8 @@ export class Dashboard implements OnInit {
   pieChartData: any;
   lineChartData: any;
   donutChartData: any;
+  last7DaysLineChartData: any;
+  last7DaysBarChartData: any;
   chartOptions: any;
 
   // Datos para secciones de resumen
@@ -60,8 +62,8 @@ export class Dashboard implements OnInit {
   constructor(public dashboardService: DashboardService) { }
 
   ngOnInit(): void {
-    this.loadDashboardData();
     this.setupChartOptions();
+    this.loadDashboardData();
   }
 
   /**
@@ -77,6 +79,7 @@ export class Dashboard implements OnInit {
         this.facturasFiltered = data;
         this.stats = this.dashboardService.calculateStats(data);
         this.prepareChartData();
+        this.prepareLast7DaysLineChart();
         this.loading = false;
       },
       error: (error) => {
@@ -106,6 +109,86 @@ export class Dashboard implements OnInit {
         console.error('Error al cargar balance de DTEs:', error);
       }
     });
+
+    // Cargar facturado por DTE últimos 7 días
+    this.dashboardService.getInvoicesLast7Days().subscribe({
+      next: (data) => {
+        this.prepareLast7DaysBarChart(data);
+      },
+      error: (error) => {
+        console.error('Error al cargar facturado ultimos 7 dias:', error);
+      }
+    });
+  }
+
+  /**
+   * Prepara el gráfico de línea de últimos 7 días
+   */
+  prepareLast7DaysLineChart(): void {
+    const today = new Date();
+    const last7Days = [];
+    const labels = [];
+    const data: number[] = [];
+
+    // Generar últimos 7 días
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date(today);
+      d.setDate(today.getDate() - i);
+      last7Days.push(d);
+
+      const dayName = d.toLocaleDateString('es-SV', { weekday: 'short' });
+      const dayNum = d.getDate();
+      labels.push(`${dayName}-${dayNum}`);
+    }
+
+    // Agrupar montos por día
+    last7Days.forEach(date => {
+      const dateStr = date.toISOString().split('T')[0];
+      const dailyTotal = this.facturas
+        .filter(f => f.fechaCreacion.startsWith(dateStr))
+        .reduce((sum, f) => sum + f.monto, 0);
+      data.push(dailyTotal);
+    });
+
+    this.last7DaysLineChartData = {
+      labels: labels,
+      datasets: [{
+        label: 'Facturado por día',
+        data: data,
+        fill: true,
+        borderColor: '#3b82f6',
+        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+        tension: 0.4,
+        pointBackgroundColor: '#3b82f6',
+        pointRadius: 4
+      }]
+    };
+  }
+
+  /**
+   * Prepara el gráfico de barras de últimos 7 días por DTE
+   */
+  prepareLast7DaysBarChart(data: any[]): void {
+    const labels = data.map(item => {
+      const date = new Date(item.fecha);
+      // Ajustar zona horaria si es necesario, asumiendo fecha local
+      const dayName = date.toLocaleDateString('es-SV', { weekday: 'short', timeZone: 'UTC' });
+      const dayNum = date.getUTCDate();
+      return `${dayName}-${dayNum}`;
+    });
+
+    const values = data.map(item => item.monto);
+
+    this.last7DaysBarChartData = {
+      labels: labels,
+      datasets: [{
+        label: 'FE', // Asumiendo que es FE por el código 01 y la imagen
+        data: values,
+        backgroundColor: '#93c5fd', // Azul claro como en la imagen
+        borderColor: '#93c5fd',
+        borderWidth: 1
+      }]
+    };
   }
 
   /**
@@ -158,6 +241,8 @@ export class Dashboard implements OnInit {
    */
   setupChartOptions(): void {
     this.chartOptions = {
+      responsive: false,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           labels: {

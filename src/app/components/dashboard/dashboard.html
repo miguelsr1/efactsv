@@ -151,9 +151,36 @@
                     </ng-template>
 
                     <div class="balance-chart">
-                        <p-chart type="doughnut" [data]="donutChartData" [options]="chartOptions" class="donut-chart"
-                            style="width: 100%; height: 158px;"></p-chart>
+                        <p-chart type="doughnut" [data]="donutChartData" [options]="chartOptions"
+                            class="donut-chart"></p-chart>
                     </div>
+                </p-card>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="grid mt-2">
+            <!-- Line Chart - Facturado últimos 7 días -->
+            <div class="col-12 lg:col-6">
+                <p-card>
+                    <ng-template pTemplate="header">
+                        <div class="card-header">
+                            <h3>Facturado de últimos 7 días</h3>
+                        </div>
+                    </ng-template>
+                    <p-chart type="line" [data]="last7DaysLineChartData" [options]="chartOptions"></p-chart>
+                </p-card>
+            </div>
+
+            <!-- Bar Chart - Facturado por DTE últimos 7 días -->
+            <div class="col-12 lg:col-6">
+                <p-card>
+                    <ng-template pTemplate="header">
+                        <div class="card-header">
+                            <h3>Facturado por DTE de últimos 7 días</h3>
+                        </div>
+                    </ng-template>
+                    <p-chart type="bar" [data]="last7DaysBarChartData" [options]="chartOptions"></p-chart>
                 </p-card>
             </div>
         </div>

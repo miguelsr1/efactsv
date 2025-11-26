@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { ApiService } from './api.service';
-import { DashboardItem, DashboardStats, InvoicedAmount, BalanceDte } from '../models/dashboard.model';
+import { DashboardItem, DashboardStats, InvoicedAmount, BalanceDte, InvoiceLast7DaysItem } from '../models/dashboard.model';
 
 /**
  * Servicio para obtener datos del dashboard de facturación
@@ -33,6 +33,13 @@ export class DashboardService {
      */
     getBalanceDte(): Observable<BalanceDte> {
         return this.apiService.get<BalanceDte>(`${this.endpoint}/balance-dte`);
+    }
+
+    /**
+     * Obtiene el facturado por DTE de los últimos 7 días
+     */
+    getInvoicesLast7Days(): Observable<InvoiceLast7DaysItem[]> {
+        return this.apiService.get<InvoiceLast7DaysItem[]>(`${this.endpoint}/invoice-last-7-days`);
     }
 
     /**

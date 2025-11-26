@@ -62,3 +62,14 @@ export interface BalanceDte {
     subTotal: number;     // DTEs generados
     pendiente: number;    // DTEs pendientes
 }
+
+/**
+ * Item de facturación de últimos 7 días
+ */
+export interface InvoiceLast7DaysItem {
+    id: number;
+    fecha: string;
+    cantidad: number;
+    monto: number;
+    codigoDte: string | null;
+}
