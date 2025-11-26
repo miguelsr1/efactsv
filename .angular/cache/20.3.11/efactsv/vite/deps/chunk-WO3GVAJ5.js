@@ -1,30 +1,11 @@
 import {
-  animate,
-  sequence,
-  state,
-  style,
-  transition,
-  trigger
-} from "./chunk-2OOBFQJQ.js";
-import {
   InputText
 } from "./chunk-NUXRBJ5Q.js";
-import {
-  zindexutils
-} from "./chunk-P5652PBR.js";
 import {
   AutoFocus,
   Button,
   Ripple
-} from "./chunk-7TJ3OGUA.js";
-import {
-  CalendarIcon,
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  ChevronUpIcon,
-  TimesIcon
-} from "./chunk-SPPV4KMH.js";
+} from "./chunk-I22NAR4C.js";
 import {
   Fluid
 } from "./chunk-ILXVQTOH.js";
@@ -37,6 +18,24 @@ import {
   BaseEditableHolder
 } from "./chunk-RNM4FP5U.js";
 import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger
+} from "./chunk-RNQ4OQM4.js";
+import {
+  zindexutils
+} from "./chunk-P5652PBR.js";
+import {
+  CalendarIcon,
+  ChevronDownIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronUpIcon,
+  TimesIcon
+} from "./chunk-TQFED76W.js";
+import {
   PARENT_INSTANCE
 } from "./chunk-RWISOUQC.js";
 import {
@@ -46,9 +45,6 @@ import {
 import {
   BaseStyle
 } from "./chunk-4HPP5VIZ.js";
-import {
-  NG_VALUE_ACCESSOR
-} from "./chunk-PYUQ7X2E.js";
 import {
   OverlayService,
   PrimeTemplate,
@@ -74,6 +70,9 @@ import {
   z
 } from "./chunk-K2WABBE6.js";
 import {
+  NG_VALUE_ACCESSOR
+} from "./chunk-PYUQ7X2E.js";
+import {
   CommonModule,
   NgClass,
   NgForOf,
@@ -82,23 +81,18 @@ import {
   NgTemplateOutlet
 } from "./chunk-YT3I55ZD.js";
 import {
-  ANIMATION_MODULE_TYPE,
   ChangeDetectionStrategy,
   Component,
   ContentChild,
   ContentChildren,
-  DOCUMENT,
   Directive,
   EventEmitter,
-  Inject,
   Injectable,
   InjectionToken,
   Input,
   NgModule,
   NgZone,
   Output,
-  RendererFactory2,
-  RuntimeError,
   ViewChild,
   ViewEncapsulation,
   booleanAttribute,
@@ -131,7 +125,6 @@ import {
   ɵɵelementStart,
   ɵɵgetCurrentView,
   ɵɵgetInheritedFactory,
-  ɵɵinject,
   ɵɵlistener,
   ɵɵloadQuery,
   ɵɵnamespaceSVG,
@@ -154,171 +147,6 @@ import {
   ɵɵtextInterpolate2,
   ɵɵviewQuery
 } from "./chunk-DO6YOXJK.js";
-
-// node_modules/@angular/animations/fesm2022/animations.mjs
-var AnimationBuilder = class _AnimationBuilder {
-  static ɵfac = function AnimationBuilder_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _AnimationBuilder)();
-  };
-  static ɵprov = ɵɵdefineInjectable({
-    token: _AnimationBuilder,
-    factory: () => (() => inject(BrowserAnimationBuilder))(),
-    providedIn: "root"
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AnimationBuilder, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root",
-      useFactory: () => inject(BrowserAnimationBuilder)
-    }]
-  }], null, null);
-})();
-var AnimationFactory = class {
-};
-var BrowserAnimationBuilder = class _BrowserAnimationBuilder extends AnimationBuilder {
-  animationModuleType = inject(ANIMATION_MODULE_TYPE, {
-    optional: true
-  });
-  _nextAnimationId = 0;
-  _renderer;
-  constructor(rootRenderer, doc) {
-    super();
-    const typeData = {
-      id: "0",
-      encapsulation: ViewEncapsulation.None,
-      styles: [],
-      data: {
-        animation: []
-      }
-    };
-    this._renderer = rootRenderer.createRenderer(doc.body, typeData);
-    if (this.animationModuleType === null && !isAnimationRenderer(this._renderer)) {
-      throw new RuntimeError(3600, (typeof ngDevMode === "undefined" || ngDevMode) && "Angular detected that the `AnimationBuilder` was injected, but animation support was not enabled. Please make sure that you enable animations in your application by calling `provideAnimations()` or `provideAnimationsAsync()` function.");
-    }
-  }
-  build(animation2) {
-    const id = this._nextAnimationId;
-    this._nextAnimationId++;
-    const entry = Array.isArray(animation2) ? sequence(animation2) : animation2;
-    issueAnimationCommand(this._renderer, null, id, "register", [entry]);
-    return new BrowserAnimationFactory(id, this._renderer);
-  }
-  static ɵfac = function BrowserAnimationBuilder_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _BrowserAnimationBuilder)(ɵɵinject(RendererFactory2), ɵɵinject(DOCUMENT));
-  };
-  static ɵprov = ɵɵdefineInjectable({
-    token: _BrowserAnimationBuilder,
-    factory: _BrowserAnimationBuilder.ɵfac,
-    providedIn: "root"
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(BrowserAnimationBuilder, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], () => [{
-    type: RendererFactory2
-  }, {
-    type: Document,
-    decorators: [{
-      type: Inject,
-      args: [DOCUMENT]
-    }]
-  }], null);
-})();
-var BrowserAnimationFactory = class extends AnimationFactory {
-  _id;
-  _renderer;
-  constructor(_id, _renderer) {
-    super();
-    this._id = _id;
-    this._renderer = _renderer;
-  }
-  create(element, options) {
-    return new RendererAnimationPlayer(this._id, element, options || {}, this._renderer);
-  }
-};
-var RendererAnimationPlayer = class {
-  id;
-  element;
-  _renderer;
-  parentPlayer = null;
-  _started = false;
-  constructor(id, element, options, _renderer) {
-    this.id = id;
-    this.element = element;
-    this._renderer = _renderer;
-    this._command("create", options);
-  }
-  _listen(eventName, callback) {
-    return this._renderer.listen(this.element, `@@${this.id}:${eventName}`, callback);
-  }
-  _command(command, ...args) {
-    issueAnimationCommand(this._renderer, this.element, this.id, command, args);
-  }
-  onDone(fn) {
-    this._listen("done", fn);
-  }
-  onStart(fn) {
-    this._listen("start", fn);
-  }
-  onDestroy(fn) {
-    this._listen("destroy", fn);
-  }
-  init() {
-    this._command("init");
-  }
-  hasStarted() {
-    return this._started;
-  }
-  play() {
-    this._command("play");
-    this._started = true;
-  }
-  pause() {
-    this._command("pause");
-  }
-  restart() {
-    this._command("restart");
-  }
-  finish() {
-    this._command("finish");
-  }
-  destroy() {
-    this._command("destroy");
-  }
-  reset() {
-    this._command("reset");
-    this._started = false;
-  }
-  setPosition(p) {
-    this._command("setPosition", p);
-  }
-  getPosition() {
-    return unwrapAnimationRenderer(this._renderer)?.engine?.players[this.id]?.getPosition() ?? 0;
-  }
-  totalTime = 0;
-};
-function issueAnimationCommand(renderer, element, id, command, args) {
-  renderer.setProperty(element, `@@${id}:${command}`, args);
-}
-function unwrapAnimationRenderer(renderer) {
-  const type = renderer.ɵtype;
-  if (type === 0) {
-    return renderer;
-  } else if (type === 1) {
-    return renderer.animationRenderer;
-  }
-  return null;
-}
-function isAnimationRenderer(renderer) {
-  const type = renderer.ɵtype;
-  return type === 0 || type === 1;
-}
 
 // node_modules/primeng/fesm2022/primeng-baseinput.mjs
 var BaseInput = class _BaseInput extends BaseEditableHolder {
@@ -6187,13 +6015,4 @@ export {
   DatePicker,
   DatePickerModule
 };
-/*! Bundled license information:
-
-@angular/animations/fesm2022/animations.mjs:
-  (**
-   * @license Angular v20.3.13
-   * (c) 2010-2025 Google LLC. https://angular.dev/
-   * License: MIT
-   *)
-*/
-//# sourceMappingURL=chunk-WHWCUQLB.js.map
+//# sourceMappingURL=chunk-WO3GVAJ5.js.map

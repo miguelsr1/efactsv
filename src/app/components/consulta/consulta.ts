@@ -7,6 +7,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TagModule } from 'primeng/tag';
 import { DatePickerModule } from 'primeng/datepicker';
 import { TooltipModule } from 'primeng/tooltip';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 import { DteService } from '../../services/dte.service';
 import { Dte, DteSearchParams } from '../../models/dte.model';
 
@@ -21,14 +23,16 @@ import { Dte, DteSearchParams } from '../../models/dte.model';
         InputTextModule,
         TagModule,
         TooltipModule,
-        DatePickerModule
+        DatePickerModule,
+        ToastModule
     ],
+    providers: [MessageService],
     templateUrl: './consulta.html',
     styleUrls: ['./consulta.css']
 })
 export class ConsultaComponent implements OnInit {
     dtes: Dte[] = [];
-    loading: boolean = true;
+    loading: boolean = false; // Cambiado a false para que inicie sin loading
     error: string | null = null;
 
     // Filtros
@@ -37,18 +41,28 @@ export class ConsultaComponent implements OnInit {
     filtroNombre: string = '';
     filtroNumDocumento: string = '';
 
-    constructor(private dteService: DteService) { }
+    constructor(
+        private dteService: DteService,
+        private messageService: MessageService
+    ) { }
 
     ngOnInit(): void {
-        this.loadDtes();
+        // No cargar datos automáticamente, la tabla inicia vacía
     }
 
     loadDtes(): void {
         this.loading = true;
+        this.error = null;
 
         const params: DteSearchParams = {};
         if (this.filtroCorreo) params.correo = this.filtroCorreo;
-        if (this.filtroFecha) params.fecha = this.filtroFecha.toISOString().split('T')[0];
+        if (this.filtroFecha) {
+            // Formatear fecha a dd/MM/yyyy
+            const day = String(this.filtroFecha.getDate()).padStart(2, '0');
+            const month = String(this.filtroFecha.getMonth() + 1).padStart(2, '0');
+            const year = this.filtroFecha.getFullYear();
+            params.fecha = `${day}/${month}/${year}`;
+        }
         if (this.filtroNombre) params.nombre = this.filtroNombre;
         if (this.filtroNumDocumento) params.numDocumento = this.filtroNumDocumento;
 
@@ -58,9 +72,30 @@ export class ConsultaComponent implements OnInit {
                 this.loading = false;
             },
             error: (err) => {
-                this.error = 'Error al cargar los DTEs';
                 this.loading = false;
-                console.error(err);
+
+                console.log("codigo de error:" + err.status);
+
+                // Si es un error 404, limpiar la tabla y mostrar toast
+                if (err.status === 404 ) {
+                    this.dtes = [];
+                    this.messageService.add({
+                        severity: 'info',
+                        summary: 'Sin resultados',
+                        detail: 'No se han encontrado registros',
+                        life: 3000
+                    });
+                } else {
+                    this.error = 'Error al cargar los DTEs';
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Error',
+                        detail: 'Error al cargar los DTEs',
+                        life: 3000
+                    });
+                }
+
+                console.error('Error en consulta:', err);
             }
         });
     }
@@ -74,7 +109,8 @@ export class ConsultaComponent implements OnInit {
         this.filtroFecha = null;
         this.filtroNombre = '';
         this.filtroNumDocumento = '';
-        this.loadDtes();
+        this.dtes = []; // Limpiar la tabla también
+        this.error = null;
     }
 
     /**

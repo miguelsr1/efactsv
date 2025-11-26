@@ -99,12 +99,14 @@ export class ApiService {
      */
     private handleError = (error: HttpErrorResponse): Observable<never> => {
         let errorMessage = 'Ocurrió un error desconocido';
+        let statusCode = 0;
 
         if (error.error instanceof ErrorEvent) {
             // Error del lado del cliente
             errorMessage = `Error: ${error.error.message}`;
         } else {
             // Error del lado del servidor
+            statusCode = error.status;
             errorMessage = `Código de error: ${error.status}\nMensaje: ${error.message}`;
 
             // Mensajes específicos según el código de error
@@ -134,7 +136,12 @@ export class ApiService {
             console.error('❌ Error en petición HTTP:', errorMessage, error);
         }
 
-        return throwError(() => new Error(errorMessage));
+        // Crear un error personalizado que preserve el status code
+        const customError: any = new Error(errorMessage);
+        customError.status = statusCode;
+        customError.originalError = error;
+
+        return throwError(() => customError);
     };
 
     /**

@@ -1,4 +1,6 @@
-<div class="consulta-container p-4">
+<div class="consulta-container">
+    <p-toast></p-toast>
+
     <!-- Filtros -->
     <div class="card bg-surface-0 dark:bg-surface-900 shadow-sm rounded-lg p-4 mb-4">
         <!-- Header -->
@@ -32,7 +34,7 @@
 
         <!-- Botones -->
         <div class="flex justify-start gap-2">
-            <button pButton label="Limpiar" icon="pi pi-filter-slash" class="p-button-outlined"
+            <button pButton label="Limpiar" icon="pi pi-filter-slash" class="p-button-outlined "
                 (click)="limpiar()"></button>
             <button pButton label="Buscar" icon="pi pi-search" (click)="buscar()"></button>
         </div>
@@ -89,11 +91,9 @@
                     </td>
                     <td>
                         <div class="flex gap-2">
-                            <button pButton icon="pi pi-print" class="p-button-info p-button-sm"
-                                pTooltip="Imprimir"></button>
-                            <button pButton icon="pi pi-ban" class="p-button-secondary p-button-sm"
-                                pTooltip="Anular"></button>
-                            <button pButton icon="pi pi-download" class="p-button-success p-button-sm"
+                            <button pButton icon="pi pi-print" class="p-button-info" pTooltip="Imprimir"></button>
+                            <button pButton icon="pi pi-ban" class="p-button-secondary" pTooltip="Anular"></button>
+                            <button pButton icon="pi pi-download" class="p-button-success"
                                 pTooltip="Descargar"></button>
                         </div>
                     </td>

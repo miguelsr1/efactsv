@@ -37,8 +37,14 @@ function transition(stateChangeExpr, steps, options = null) {
 function animation(steps, options = null) {
   return { type: AnimationMetadataType.Reference, animation: steps, options };
 }
+function animateChild(options = null) {
+  return { type: AnimationMetadataType.AnimateChild, options };
+}
 function useAnimation(animation2, options = null) {
   return { type: AnimationMetadataType.AnimateRef, animation: animation2, options };
+}
+function query(selector, animation2, options = null) {
+  return { type: AnimationMetadataType.Query, selector, animation: animation2, options };
 }
 var NoopAnimationPlayer = class {
   _onDoneFns = [];
@@ -273,7 +279,9 @@ export {
   state,
   transition,
   animation,
+  animateChild,
   useAnimation,
+  query,
   NoopAnimationPlayer,
   AnimationGroupPlayer,
   ɵPRE_STYLE
@@ -287,4 +295,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-2OOBFQJQ.js.map
+//# sourceMappingURL=chunk-RNQ4OQM4.js.map

@@ -24,3 +24,8 @@
     padding-block: var(--p-inputtext-sm-padding-y);
     padding-inline: var(--p-inputtext-sm-padding-x);
 }
+
+.p-button {
+    font-size: var(--p-button-sm-font-size) !important;
+    padding: var(--p-button-sm-padding-y) var(--p-button-sm-padding-x) !important;
+}
