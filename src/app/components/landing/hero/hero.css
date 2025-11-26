@@ -1,0 +1,64 @@
+/* Hero Component Styles */
+
+/* Hero layout */
+.hero-layout {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 28px 0;
+    transition: all 0.3s ease;
+}
+
+.hero-left {
+    flex: 1;
+}
+
+.hero-right {
+    width: 380px;
+    transition: transform 0.3s ease;
+}
+
+.hero-right:hover {
+    transform: scale(1.02);
+}
+
+.eyebrow {
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 10px;
+    transition: color 0.2s ease;
+}
+
+.hero-actions {
+    margin-top: 14px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.quick-list {
+    margin-top: 16px;
+    color: var(--muted);
+    list-style: none;
+    padding: 0;
+}
+
+.quick-list li {
+    margin: 6px 0;
+    transition: color 0.2s ease;
+}
+
+.quick-list li:hover {
+    color: var(--text);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .hero-layout {
+        flex-direction: column;
+    }
+
+    .hero-right {
+        width: 100%;
+    }
+}
