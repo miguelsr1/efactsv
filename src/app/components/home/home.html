@@ -1,0 +1,97 @@
+<div class="home-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" [class.sidebar-closed]="!sidebarOpen">
+        <!-- Logo y título -->
+        <div class="sidebar-header">
+            <div class="logo">
+                <div class="logo-icon">e-F</div>
+            </div>
+            <h1 class="app-title" *ngIf="sidebarOpen">FacturaMe</h1>
+        </div>
+
+        <!-- Menú de navegación -->
+        <nav class="sidebar-nav">
+            <!-- FAVORITOS -->
+            <div class="menu-section">
+                <h3 class="menu-section-title" *ngIf="sidebarOpen">FAVORITOS</h3>
+                <ul class="menu-list">
+                    <li *ngFor="let item of menuItems.favoritos">
+                        <a [routerLink]="item.route" routerLinkActive="active" class="menu-item">
+                            <i class="pi" [ngClass]="item.icon"></i>
+                            <span *ngIf="sidebarOpen">{{ item.label }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- OPERACIONES -->
+            <div class="menu-section">
+                <h3 class="menu-section-title" *ngIf="sidebarOpen">OPERACIONES</h3>
+                <ul class="menu-list">
+                    <li *ngFor="let item of menuItems.operaciones">
+                        <a [routerLink]="item.route" routerLinkActive="active" class="menu-item">
+                            <i class="pi" [ngClass]="item.icon"></i>
+                            <span *ngIf="sidebarOpen">{{ item.label }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- MANTENIMIENTOS -->
+            <div class="menu-section">
+                <h3 class="menu-section-title" *ngIf="sidebarOpen">MANTENIMIENTOS</h3>
+                <ul class="menu-list">
+                    <li *ngFor="let item of menuItems.mantenimientos">
+                        <a [routerLink]="item.route" routerLinkActive="active" class="menu-item">
+                            <i class="pi" [ngClass]="item.icon"></i>
+                            <span *ngIf="sidebarOpen">{{ item.label }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="top-header">
+            <button class="menu-toggle" (click)="toggleSidebar()">
+                <i class="pi pi-bars"></i>
+            </button>
+
+            <div class="header-right">
+                <!-- Usuario -->
+                <div class="user-info" *ngIf="currentUser">
+                    <div class="user-avatar">
+                        <i class="pi pi-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name">{{ currentUser.fullName || currentUser.username }}</div>
+                        <div class="user-role">{{ currentUser.username }}</div>
+                    </div>
+                </div>
+
+                <!-- Logout -->
+                <button class="logout-btn" (click)="logout()" title="Cerrar sesión">
+                    <i class="pi pi-sign-out"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Área de contenido -->
+        <main class="content-area">
+            <div class="welcome-section">
+                <h2>Bienvenido</h2>
+            </div>
+
+            <!-- Router outlet para contenido dinámico -->
+            <router-outlet></router-outlet>
+        </main>
+
+        <!-- Botón flotante de configuración -->
+        <button class="settings-fab" (click)="goToSettings()" title="Configuración">
+            <i class="pi pi-cog"></i>
+        </button>
+    </div>
+</div>

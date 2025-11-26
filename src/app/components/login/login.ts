@@ -7,6 +7,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,14 +17,68 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.css'],
 })
 export class Login {
+  // Credenciales
+  username = '';
+  password = '';
 
-  constructor(private router: Router) { }
+  // Estados
+  loading = false;
+  error: string | null = null;
 
-  checked1 = signal<boolean>(true);
+  // Checkbox "Recordarme"
+  checked1 = signal<boolean>(false);
 
-  goToHome() {
-    this.router.navigate(['/']);
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) { }
+
+  /**
+   * Maneja el evento de login
+   */
+  onLogin(): void {
+    // Validar campos
+    if (!this.username || !this.password) {
+      this.error = 'Por favor ingresa usuario y contraseña';
+      return;
+    }
+
+    this.loading = true;
+    this.error = null;
+
+    // Llamar al servicio de autenticación
+    this.authService.login({
+      username: this.username,
+      password: this.password
+    }).subscribe({
+      next: (response) => {
+        console.log('✅ Login exitoso');
+        this.loading = false;
+
+        // Redirigir al home
+        this.router.navigate(['/home']);
+      },
+      error: (error) => {
+        console.error('❌ Error en login:', error);
+
+        // Mostrar mensaje de error apropiado
+        if (error.status === 401) {
+          this.error = 'Usuario o contraseña incorrectos';
+        } else if (error.status === 0) {
+          this.error = 'No se pudo conectar al servidor';
+        } else {
+          this.error = 'Error al iniciar sesión. Intenta nuevamente.';
+        }
+
+        this.loading = false;
+      }
+    });
   }
 
-  
+  /**
+   * Navega al home sin login
+   */
+  goToHome(): void {
+    this.router.navigate(['/']);
+  }
 }

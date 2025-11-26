@@ -1,0 +1,52 @@
+/* Feature Component Styles */
+
+/* Feature card */
+.feature-card {
+    background: var(--card);
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(2, 6, 23, 0.04);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(2, 6, 23, 0.12);
+}
+
+.feature-card h3 {
+    margin: 0 0 6px;
+    transition: color 0.2s ease;
+}
+
+.feature-card:hover h3 {
+    color: var(--primary);
+}
+
+/* Icon container */
+.feature-card span[class*="flex h-16"] {
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover span[class*="flex h-16"] {
+    transform: scale(1.1);
+    background: var(--primary) !important;
+}
+
+.feature-card:hover span[class*="flex h-16"] i {
+    color: white !important;
+}
+
+/* Grid layout */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .grid-3 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
