@@ -1,0 +1,164 @@
+<div class="dashboard-container">
+    <!-- Loading State -->
+    <div *ngIf="loading" class="loading-state">
+        <i class="pi pi-spin pi-spinner" style="font-size: 3rem"></i>
+        <p>Cargando dashboard...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error" class="error-state">
+        <i class="pi pi-exclamation-triangle" style="font-size: 3rem; color: #ef4444"></i>
+        <p>{{ error }}</p>
+        <button pButton label="Reintentar" icon="pi pi-refresh" (click)="loadDashboardData()"></button>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div *ngIf="!loading && !error && stats">
+        <!-- KPI Cards -->
+        <div class="flex flex-wrap gap-4 mt-2">
+            <!-- Total Facturas -->
+            <div class="flex-1 min-w-16rem bg-surface-0 dark:bg-surface-900 shadow-sm p-5 rounded-2xl">
+                <div class="flex justify-between gap-4">
+                    <div class="flex flex-col gap-2">
+                        <span class="text-surface-700 dark:text-surface-300 font-normal leading-tight">Total
+                            Facturas</span>
+                        <div class="text-surface-900 dark:text-surface-0 font-semibold text-2xl! leading-tight!">{{
+                            stats.totalFacturas }}</div>
+                    </div>
+                    <div
+                        class="flex items-center justify-center bg-linear-to-b from-cyan-400 dark:from-cyan-300 to-cyan-600 dark:to-cyan-500 rounded-lg w-2 h-10">
+                        <i class="pi pi-file text-surface-0 dark:text-surface-900 text-xl! leading-none!"></i>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <span class="text-surface-600 dark:text-surface-300 font-medium leading-tight">24 new</span>
+                    <span class="text-surface-500 dark:text-surface-300 leading-tight"> since last visit</span>
+                </div>
+            </div>
+
+            <!-- Monto Total -->
+            <div class="flex-1 min-w-16rem bg-surface-0 dark:bg-surface-900 shadow-sm p-5 rounded-2xl">
+                <div class="flex justify-between gap-4">
+                    <div class="flex flex-col gap-2">
+                        <span class="text-surface-700 dark:text-surface-300 font-normal leading-tight">Monto
+                            Total</span>
+                        <div class="text-surface-900 dark:text-surface-0 font-semibold text-2xl! leading-tight!">{{
+                            formatCurrency(stats.montoTotal) }}
+                        </div>
+                    </div>
+                    <div
+                        class="flex items-center justify-center bg-linear-to-b from-orange-400 dark:from-orange-300 to-orange-600 dark:to-orange-500 rounded-lg w-2 h-10">
+                        <i class="pi pi-dollar text-surface-0 dark:text-surface-900 text-xl! leading-none!"></i>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <span class="text-surface-600 dark:text-surface-300 font-medium leading-tight">48 new</span>
+                    <span class="text-surface-500 dark:text-surface-300 leading-tight"> since last visit</span>
+                </div>
+            </div>
+
+            <!-- Enviadas -->
+            <div class="flex-1 min-w-16rem bg-surface-0 dark:bg-surface-900 shadow-sm p-5 rounded-2xl">
+                <div class="flex justify-between gap-4">
+                    <div class="flex flex-col gap-2">
+                        <span class="text-surface-700 dark:text-surface-300 font-normal leading-tight">Enviadas</span>
+                        <div class="text-surface-900 dark:text-surface-0 font-semibold text-2xl! leading-tight!">
+                            {{ stats.facturasPorEstado['ENVIADO'] || 0 }}</div>
+                    </div>
+                    <div
+                        class="flex items-center justify-center bg-linear-to-b from-slate-400 dark:from-slate-300 to-slate-600 dark:to-slate-500 rounded-lg w-2 h-10">
+                        <i class="pi pi-check-circle text-surface-0 dark:text-surface-900 text-xl! leading-none!"></i>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <span class="text-surface-500 dark:text-surface-300 leading-tight">32,56 / 250 GB</span>
+                </div>
+            </div>
+
+            <!-- Pendientes -->
+            <div class="flex-1 min-w-16rem bg-surface-0 dark:bg-surface-900 shadow-sm p-5 rounded-2xl">
+                <div class="flex justify-between gap-4">
+                    <div class="flex flex-col gap-2">
+                        <span class="text-surface-700 dark:text-surface-300 font-normal leading-tight">Pendientes</span>
+                        <div class="text-surface-900 dark:text-surface-0 font-semibold text-2xl! leading-tight!">
+                            {{ stats.facturasPorEstado['PENDIENTE'] || 0 }}</div>
+                    </div>
+                    <div
+                        class="flex items-center justify-center bg-linear-to-b from-violet-400 dark:from-violet-300 to-violet-600 dark:to-violet-500 rounded-lg w-2 h-10">
+                        <i class="pi pi-clock text-surface-0 dark:text-surface-900 text-xl! leading-none!"></i>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <span class="text-surface-600 dark:text-surface-300 font-medium leading-tight">72 new</span>
+                    <span class="text-surface-500 dark:text-surface-300 leading-tight"> user this week</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección Resumen -->
+        <div class="grid mt-2">
+            <!-- Subtotales por tipo de DTE -->
+            <div class="col-12 md:col-6 lg:col-8">
+                <p-card>
+                    <ng-template pTemplate="header">
+                        <div class="card-header flex justify-between items-center">
+                            <h3>Subtotales por tipo de DTE</h3>
+                            <button pButton icon="pi pi-ellipsis-v" class="p-button-text p-button-rounded"></button>
+                        </div>
+                    </ng-template>
+
+                    <div class="subtotales-table">
+                        <table class="w-full">
+                            <thead>
+                                <tr>
+                                    <th class="text-left">PERIODO</th>
+                                    <th class="text-right">FE</th>
+                                    <th class="text-right">CCF</th>
+                                    <th class="text-right">NR</th>
+                                    <th class="text-right">NC</th>
+                                    <th class="text-right">ND</th>
+                                    <th class="text-right">FSE</th>
+                                    <th class="text-right">ANU</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of invoicedAmounts">
+                                    <td class="font-semibold">{{ row.periodo }}</td>
+                                    <td class="text-right">{{ formatCurrency(row.fe) }}</td>
+                                    <td class="text-right">{{ formatCurrency(row.ccf) }}</td>
+                                    <td class="text-right">{{ formatCurrency(row.nr) }}</td>
+                                    <td class="text-right">{{ formatCurrency(row.nc) }}</td>
+                                    <td class="text-right">{{ formatCurrency(row.nd) }}</td>
+                                    <td class="text-right">{{ formatCurrency(row.fse) }}</td>
+                                    <td class="text-right" [class.text-red-500]="row.anu > 0">{{ formatCurrency(row.anu)
+                                        }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </p-card>
+            </div>
+
+            <!-- Balance del plan -->
+            <div class="col-12 md:col-6 lg:col-4">
+                <p-card>
+                    <ng-template pTemplate="header">
+                        <div class="card-header flex justify-between items-center">
+                            <h3>Balance del plan mensual</h3>
+                            <button pButton icon="pi pi-cog"
+                                class="p-button-text p-button-rounded p-button-secondary"></button>
+                        </div>
+                    </ng-template>
+
+                    <div class="balance-chart">
+                        <p-chart type="doughnut" [data]="donutChartData" [options]="chartOptions" class="donut-chart"
+                            style="width: 100%; height: 158px;"></p-chart>
+                    </div>
+                </p-card>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
