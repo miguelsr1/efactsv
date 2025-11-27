@@ -174,7 +174,7 @@ export class ConsultaComponent implements OnInit {
         this.displayPdfDialog = true;
         this.currentDte = dte; // Guardar el DTE actual
 
-        this.dteService.getReport(dte.idFactura).subscribe({
+        this.dteService.getReportPdf(dte.idFactura).subscribe({
             next: (response) => {
                 // Convertir base64 a blob
                 const byteCharacters = atob(response.pdf);
@@ -243,6 +243,82 @@ export class ConsultaComponent implements OnInit {
             this.pdfUrl = null;
         }
         this.currentDte = null; // Limpiar el DTE actual
+    }
+
+    /**
+     * Descarga el PDF y JSON del DTE
+     */
+    downloadDte(dte: Dte): void {
+        // Descargar PDF
+        this.dteService.getReportPdf(dte.idFactura).subscribe({
+            next: (response) => {
+                // Convertir base64 a blob
+                const byteCharacters = atob(response.pdf);
+                const byteNumbers = new Array(byteCharacters.length);
+                for (let i = 0; i < byteCharacters.length; i++) {
+                    byteNumbers[i] = byteCharacters.charCodeAt(i);
+                }
+                const byteArray = new Uint8Array(byteNumbers);
+                const blob = new Blob([byteArray], { type: 'application/pdf' });
+
+                // Descargar PDF
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `${dte.codigoGeneracion}.pdf`;
+                link.click();
+                URL.revokeObjectURL(url);
+
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'PDF Descargado',
+                    detail: 'El archivo PDF se ha descargado correctamente',
+                    life: 3000
+                });
+            },
+            error: (err) => {
+                this.messageService.add({
+                    severity: 'error',
+                    summary: 'Error',
+                    detail: 'Error al descargar el PDF',
+                    life: 3000
+                });
+                console.error('Error al descargar PDF:', err);
+            }
+        });
+
+        // Descargar JSON
+        this.dteService.getReportJson(dte.idFactura).subscribe({
+            next: (response) => {
+                // Convertir objeto JSON a string
+                const jsonString = JSON.stringify(response.json, null, 2);
+                const blob = new Blob([jsonString], { type: 'application/json' });
+
+                // Descargar JSON
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `${dte.codigoGeneracion}.json`;
+                link.click();
+                URL.revokeObjectURL(url);
+
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'JSON Descargado',
+                    detail: 'El archivo JSON se ha descargado correctamente',
+                    life: 3000
+                });
+            },
+            error: (err) => {
+                this.messageService.add({
+                    severity: 'error',
+                    summary: 'Error',
+                    detail: 'Error al descargar el JSON',
+                    life: 3000
+                });
+                console.error('Error al descargar JSON:', err);
+            }
+        });
     }
 
     /**

@@ -30,7 +30,14 @@ export class DteService {
     /**
      * Obtiene el reporte PDF de un DTE específico
      */
-    getReport(idFactura: number): Observable<{ pdf: string }> {
-        return this.apiService.get<{ pdf: string }>(`${this.endpoint}/report/${idFactura}`);
+    getReportPdf(idFactura: number): Observable<{ pdf: string }> {
+        return this.apiService.get<{ pdf: string }>(`${this.endpoint}/report/pdf/${idFactura}`);
+    }
+
+    /**
+     * Obtiene el reporte JSON de un DTE específico
+     */
+    getReportJson(idFactura: number): Observable<{ json: any }> {
+        return this.apiService.get<{ json: any }>(`${this.endpoint}/report/json/${idFactura}`);
     }
 }

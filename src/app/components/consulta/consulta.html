@@ -97,7 +97,7 @@
                                 (click)="showInvalidateDialog(dte)"
                                 [disabled]="dte.estado !== 1 && dte.estado !== 4"></button>
                             <button pButton icon="pi pi-download" class="p-button-success" pTooltip="Descargar"
-                                [disabled]="dte.estado !== 1 && dte.estado !== 4"></button>
+                                (click)="downloadDte(dte)" [disabled]="dte.estado !== 1 && dte.estado !== 4"></button>
                         </div>
                     </td>
                 </tr>
