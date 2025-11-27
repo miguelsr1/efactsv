@@ -26,4 +26,11 @@ export class DteService {
 
         return this.apiService.get<Dte[]>(`${this.endpoint}/all`, queryParams);
     }
+
+    /**
+     * Obtiene el reporte PDF de un DTE específico
+     */
+    getReport(idFactura: number): Observable<{ pdf: string }> {
+        return this.apiService.get<{ pdf: string }>(`${this.endpoint}/report/${idFactura}`);
+    }
 }

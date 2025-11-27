@@ -91,10 +91,13 @@
                     </td>
                     <td>
                         <div class="flex gap-2">
-                            <button pButton icon="pi pi-print" class="p-button-info" pTooltip="Imprimir"></button>
-                            <button pButton icon="pi pi-ban" class="p-button-secondary" pTooltip="Anular"></button>
-                            <button pButton icon="pi pi-download" class="p-button-success"
-                                pTooltip="Descargar"></button>
+                            <button pButton icon="pi pi-print" class="p-button-info" pTooltip="Imprimir"
+                                (click)="printDte(dte)" [disabled]="dte.estado !== 1 && dte.estado !== 4"></button>
+                            <button pButton icon="pi pi-ban" class="p-button-secondary" pTooltip="Anular"
+                                (click)="showInvalidateDialog(dte)"
+                                [disabled]="dte.estado !== 1 && dte.estado !== 4"></button>
+                            <button pButton icon="pi pi-download" class="p-button-success" pTooltip="Descargar"
+                                [disabled]="dte.estado !== 1 && dte.estado !== 4"></button>
                         </div>
                     </td>
                 </tr>
@@ -109,4 +112,77 @@
             </ng-template>
         </p-table>
     </div>
+
+    <!-- PDF Viewer Dialog -->
+    <p-dialog header="Reporte DTE" [(visible)]="displayPdfDialog" [modal]="true"
+        [style]="{width: '90vw', height: '90vh'}" [draggable]="false" [resizable]="false" (onHide)="closePdfDialog()">
+        <ng-template pTemplate="header">
+            <div class="flex justify-between items-center w-full">
+                <span class="text-xl font-semibold">Reporte DTE</span>
+                <button pButton icon="pi pi-download" label="Descargar" class="p-button-success" (click)="downloadPdf()"
+                    [disabled]="!pdfUrl || loadingPdf"></button>
+            </div>
+        </ng-template>
+
+        <div class="pdf-viewer-container" style="width: 100%; height: calc(90vh - 150px);">
+            <div *ngIf="loadingPdf" class="flex justify-center items-center h-full">
+                <i class="pi pi-spin pi-spinner" style="font-size: 3rem;"></i>
+            </div>
+            <iframe *ngIf="!loadingPdf && pdfUrl" [src]="pdfUrl" style="width: 100%; height: 100%; border: none;"
+                type="application/pdf">
+            </iframe>
+        </div>
+    </p-dialog>
+
+    <!-- Invalidate Dialog -->
+    <p-dialog [header]="'Anulación de DTE: ' + (invalidateInfo?.nombreDte || '')" [(visible)]="displayInvalidateDialog"
+        [modal]="true" [style]="{width: '50vw'}" [draggable]="false" [resizable]="false" (onHide)="cancelInvalidate()">
+
+        <div *ngIf="loadingInvalidateInfo" class="flex justify-center items-center" style="min-height: 200px;">
+            <i class="pi pi-spin pi-spinner" style="font-size: 3rem;"></i>
+        </div>
+
+        <div *ngIf="!loadingInvalidateInfo && invalidateInfo" class="invalidate-info">
+            <div class="grid formgrid p-fluid">
+                <!-- Columna Izquierda -->
+                <div class="field col-12 md:col-6">
+                    <label class="text-sm text-surface-600 dark:text-surface-300 mb-2">Código generación</label>
+                    <div class="text-base font-medium">{{ invalidateInfo.codigoGeneracion }}</div>
+                </div>
+
+                <!-- Columna Derecha -->
+                <div class="field col-12 md:col-6">
+                    <label class="text-sm text-surface-600 dark:text-surface-300 mb-2">Sello recepción</label>
+                    <div class="text-base font-medium">{{ invalidateInfo.selloRecibido }}</div>
+                </div>
+
+                <!-- Tipo DTE -->
+                <div class="field col-12 md:col-6">
+                    <label class="text-sm text-surface-600 dark:text-surface-300 mb-2">Tipo DTE</label>
+                    <div class="text-base font-medium">{{ invalidateInfo.nombreDte }}</div>
+                </div>
+
+                <!-- Monto operación -->
+                <div class="field col-12 md:col-6">
+                    <label class="text-sm text-surface-600 dark:text-surface-300 mb-2">Monto operación</label>
+                    <div class="text-base font-medium">{{ invalidateInfo.total | number:'1.2-2' }}</div>
+                </div>
+
+                <!-- Fecha generación -->
+                <div class="field col-12">
+                    <label class="text-sm text-surface-600 dark:text-surface-300 mb-2">Fecha generación</label>
+                    <div class="text-base font-medium">{{ invalidateInfo.fechaProcesamiento }}</div>
+                </div>
+            </div>
+        </div>
+
+        <ng-template pTemplate="footer">
+            <div class="flex justify-start gap-2">
+                <button pButton icon="pi pi-times" label="Cancelar" class="p-button-text" (click)="cancelInvalidate()"
+                    [disabled]="invalidating"></button>
+                <button pButton icon="pi pi-ban" label="Anular" class="p-button-primary" (click)="confirmInvalidate()"
+                    [disabled]="invalidating || loadingInvalidateInfo" [loading]="invalidating"></button>
+            </div>
+        </ng-template>
+    </p-dialog>
 </div>

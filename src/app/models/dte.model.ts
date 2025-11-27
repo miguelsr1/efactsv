@@ -22,3 +22,16 @@ export interface DteSearchParams {
     nombre?: string;
     numDocumento?: string;
 }
+
+export interface InvalidateInfo {
+    codigoGeneracion: string;
+    selloRecibido: string;
+    nombreDte: string;
+    total: number;
+    fechaProcesamiento: string;
+}
+
+export interface InvalidateRequest {
+    idFactura: number;
+}
+
