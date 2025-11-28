@@ -12,7 +12,8 @@ import {
 } from "./chunk-RNQ4OQM4.js";
 import {
   Button
-} from "./chunk-TSHTQFU7.js";
+} from "./chunk-KEYBGV3M.js";
+import "./chunk-SDVEITML.js";
 import {
   DomHandler,
   blockBodyScroll,
@@ -23,7 +24,7 @@ import {
   TimesIcon,
   WindowMaximizeIcon,
   WindowMinimizeIcon
-} from "./chunk-XTHLTUI3.js";
+} from "./chunk-TDAXW34O.js";
 import "./chunk-CMDMB3GK.js";
 import {
   BaseComponent,

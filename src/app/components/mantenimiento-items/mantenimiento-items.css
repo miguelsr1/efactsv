@@ -1,0 +1,43 @@
+.mantenimiento-items-container {
+    padding: 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .mantenimiento-items-container {
+        padding: 0.5rem;
+    }
+}
+
+/* Table enhancements */
+::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
+    background-color: var(--surface-hover) !important;
+    cursor: pointer;
+}
+
+/* Form field spacing */
+.field {
+    margin-bottom: 1rem;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* Required field indicator */
+.text-red-500 {
+    color: #ef4444;
+}
+
+/* Dialog customization */
+::ng-deep .p-dialog .p-dialog-header {
+    background: var(--surface-0);
+    border-bottom: 1px solid var(--surface-border);
+}
+
+::ng-deep .p-dialog .p-dialog-content {
+    padding: 1.5rem;
+}
